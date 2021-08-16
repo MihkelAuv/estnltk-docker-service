@@ -1,0 +1,9 @@
+name: estnltk
+channels:
+  - conda-forge
+  - estnltk
+dependencies:
+  - python=3.8
+  - estnltk=1.6.8b
+  - flask
+  - gunicorn
