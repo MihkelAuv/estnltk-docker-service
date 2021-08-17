@@ -1,11 +1,12 @@
-from flask import Flask, Response, json
+from flask import Flask, json, jsonify, request, Response
 from estnltk import Text
 
 app = Flask(__name__)
 
-@app.route("/lemma/<sentence>", methods = ['GET'])
-def lemma(sentence):
-    text = Text(sentence)
+@app.route("/lemma", methods = ['POST'])
+def lemma():
+    request_text = request.get_json(force = True)
+    text = Text(request_text)
     text.tag_layer()
 
     lemmas = []
