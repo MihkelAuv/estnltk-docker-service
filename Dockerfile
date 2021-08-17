@@ -1,17 +1,30 @@
-FROM continuumio/miniconda3
+FROM continuumio/miniconda3 AS build
+
+COPY conda_environment.yml .
+RUN conda env create -f conda_environment.yml
+
+RUN conda install -c conda-forge conda-pack
+
+RUN conda-pack -n estnltk -o /tmp/env.tar && \
+  mkdir /venv && cd /venv && tar xf /tmp/env.tar && \
+  rm /tmp/env.tar
+
+RUN /venv/bin/conda-unpack
+
+
+FROM debian:buster-slim AS runtime
+
+COPY --from=build /venv /venv
 
 WORKDIR /app
 
-COPY conda_environment.yml .
 COPY service.py .
 COPY boot.sh .
 
 RUN chmod +x boot.sh
 
-RUN conda env create -f conda_environment.yml
-
-RUN echo "source activate estnltk" > ~/.bashrc
-ENV PATH /opt/conda/envs/estnltk/bin:$PATH
+RUN echo "source /venv/bin/activate" > ~/.bashrc
+ENV PATH /venv/bin:$PATH
 
 EXPOSE 5000
 
