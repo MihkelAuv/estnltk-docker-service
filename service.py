@@ -1,4 +1,4 @@
-from flask import Flask, json, jsonify, request, Response
+from flask import Flask, json, request, Response
 from estnltk import Text
 
 app = Flask(__name__)
