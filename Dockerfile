@@ -12,7 +12,7 @@ RUN conda-pack -n estnltk -o /tmp/env.tar && \
 RUN /venv/bin/conda-unpack
 
 
-FROM debian:bullseye-slim AS runtime
+FROM debian:bookworm-slim AS runtime
 
 COPY --from=build /venv /venv
 
