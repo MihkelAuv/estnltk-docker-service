@@ -1,5 +1,5 @@
 from flask import Flask, json, request, Response
-from estnltk import Text
+from estnltk import Text, __version__
 
 app = Flask(__name__)
 
@@ -16,3 +16,7 @@ def lemma():
             lemmas.append(word.morph_analysis.lemma[0])
 
     return Response(json.dumps(lemmas),  content_type = 'application/json; charset=utf-8', status = 200)
+
+@app.route("/version", methods = ['GET'])
+def version():
+    return Response(__version__, content_type = 'application/json; charset=utf-8', status = 200)
