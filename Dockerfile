@@ -26,7 +26,7 @@ RUN chmod +x boot.sh
 RUN echo "source /venv/bin/activate" > ~/.bashrc
 ENV PATH=/venv/bin:$PATH
 
-RUN [ "python3", "-c", "import nltk; nltk.download('punkt', download_dir='/root/nltk_data')" ]
+RUN [ "python3", "-c", "import nltk; nltk.download('punkt_tab', download_dir='/root/nltk_data')" ]
 
 EXPOSE 5000
 
