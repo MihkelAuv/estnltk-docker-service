@@ -3,7 +3,7 @@ channels:
   - conda-forge
   - estnltk
 dependencies:
-  - python=3.9
-  - estnltk=1.7.2
+  - python=3.10
+  - estnltk=1.7.3
   - flask
   - gunicorn
